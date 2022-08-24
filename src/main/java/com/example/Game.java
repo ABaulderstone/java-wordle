@@ -28,7 +28,7 @@ public class Game {
   public void compareWords(String input) {
     if(input.equals(selectedWord)) {
       this.won = true;
-      this.addWordToGuesses(TextColor.GREEN.text + input + TextColor.RESET.text);
+      this.guesses.add(TextColor.GREEN.text + input + TextColor.RESET.text);
       return; 
     }
 
@@ -59,18 +59,27 @@ public class Game {
       this.compareWords(guess);
       this.attempts++;
     }
+    System.out.println(generateResultMessage());
   }
 
-  private void addWordToGuesses(String word) {
-    this.guesses.add(word);
-  }
+ 
 
   public void printGuesses(){
+    if(this.attempts == 0) return;
+    System.out.println("Guesses: ");
+    System.out.println();
     for (String word : this.guesses) {
       System.out.println(word);
     }
   }
 
+
+  public String generateResultMessage() {
+    if(this.won) {
+      return String.format("Congratulations, you gussed the word in %d attempts", this.attempts);
+    }
+    return String.format("Bad Luck, you failed to guess the word. It was %s", this.selectedWord);
+  }
   public String getSelectedWord() {
     return selectedWord;
   }

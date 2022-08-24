@@ -10,7 +10,7 @@ public class UserInput {
   }
 
   public String takeValidInput() {
-    
+    System.out.println("Please enter a valid 5 letter word");
 		
 		while(!s.hasNext("[a-zA-Z]{5}")) { 
 			System.out.println(TextColor.RED.text + "Input must be a 5 letter word" + TextColor.RESET.text );

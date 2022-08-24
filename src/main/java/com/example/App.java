@@ -14,7 +14,7 @@ public class App
     public static void main( String[] args )
     {
         try {
-            Game game = new Game((byte) 5);
+            Game game = new Game((byte) 6);
             System.out.println(TextColor.GREEN.text + game.getSelectedWord() + TextColor.RESET.text);
             game.run();
         } catch (IOException | ParseException e) {
