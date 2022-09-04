@@ -6,13 +6,12 @@ public class Guess {
   String word;
   String colorizedOutput;
   char[] letters;
-  char[] greenLetters;
-  char[] yellowLetters;
+  char[] greenLetters = {'_', '_', '_', '_', '_' };
+  char[] yellowLetters = {'_', '_', '_', '_', '_' };
   
   public Guess(String word) {
     this.word = word;
     this.letters = word.toCharArray();
-    this.greenLetters = new char[5];
   }
 
   public boolean compare(String selectedWord) {
