@@ -9,7 +9,8 @@ public class App
     public static void main( String[] args )
     {
         try {
-            Game game = new Game((byte) 6);
+            WordSelector jsonSelector = new WordSelector("src/main/java/com/example/data/word-list.json");
+            Game game = new Game(jsonSelector);
             System.out.println(TextColor.GREEN.text + game.getSelectedWord() + TextColor.RESET.text);
             game.run();
         } catch (IOException | ParseException e) {

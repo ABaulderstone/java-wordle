@@ -7,18 +7,19 @@ import java.util.ArrayList;
 import org.json.simple.parser.ParseException;
 
 public class Game {
+  private WordSelector selector;
   private String selectedWord; 
   private boolean won;
   private byte attempts;
-  private byte maxAttempts;
+  final byte MAX_ATTEMPTS = 6;
   private ArrayList<String> guesses;
   private UserInput userInput;
 
-  Game(byte maxAttempts) throws FileNotFoundException, IOException, ParseException {
-    this.selectedWord = new WordSelector("src/main/java/com/example/data/word-list.json").randomWord();
+  Game(WordSelector selector) {
+    this.selector = selector;
     this.won = false;
     this.attempts = 0;
-    this.maxAttempts = maxAttempts;
+    this.selectedWord = this.selector.randomWord();
     this.guesses = new ArrayList<>();
     this.userInput = new UserInput();
   }
