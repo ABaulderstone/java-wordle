@@ -1,25 +1,28 @@
-package com.example;
+package gamelogic;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 
-import org.json.simple.parser.ParseException;
+
+import com.example.TextColor;
+import com.example.input.UserInput;
+
+import selectors.JsonSelector;
 
 public class Game {
-  private WordSelector selector;
+  private JsonSelector selector;
   private String selectedWord; 
   private boolean won;
   private byte attempts;
-  final byte MAX_ATTEMPTS = 6;
   private ArrayList<String> guesses;
   private UserInput userInput;
-
-  Game(WordSelector selector) {
+  
+  final byte MAX_ATTEMPTS = 6;
+  
+  public Game(JsonSelector selector) {
     this.selector = selector;
+    this.selectedWord = this.selector.randomWord();
     this.won = false;
     this.attempts = 0;
-    this.selectedWord = this.selector.randomWord();
     this.guesses = new ArrayList<>();
     this.userInput = new UserInput();
   }
@@ -54,7 +57,7 @@ public class Game {
   }
 
   public void run() {
-    while (this.attempts < this.maxAttempts && !this.won) {
+    while (this.attempts < this.MAX_ATTEMPTS && !this.won) {
       this.printGuesses();
       String guess = this.userInput.takeValidInput(); 
       this.compareWords(guess);

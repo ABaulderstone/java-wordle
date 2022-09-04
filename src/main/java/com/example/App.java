@@ -4,12 +4,15 @@ import java.io.IOException;
 
 import org.json.simple.parser.ParseException;
 
+import gamelogic.Game;
+import selectors.JsonSelector;
+
 public class App 
 {
     public static void main( String[] args )
     {
         try {
-            WordSelector jsonSelector = new WordSelector("src/main/java/com/example/data/word-list.json");
+            JsonSelector jsonSelector = new JsonSelector("src/main/java/com/example/data/word-list.json");
             Game game = new Game(jsonSelector);
             System.out.println(TextColor.GREEN.text + game.getSelectedWord() + TextColor.RESET.text);
             game.run();

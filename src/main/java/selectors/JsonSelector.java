@@ -1,4 +1,4 @@
-package com.example;
+package selectors;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -10,14 +10,14 @@ import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-public class WordSelector {
+public class JsonSelector extends WordSelector {
   private ArrayList<String> wordList;
 
-  WordSelector(String path) throws FileNotFoundException, IOException, ParseException { 
+  public JsonSelector(String path) throws FileNotFoundException, IOException, ParseException { 
     this.wordList = loadList(path);
   }
   
-  private ArrayList<String> loadList(String path) throws FileNotFoundException, IOException, ParseException {
+  protected ArrayList<String> loadList(String path) throws FileNotFoundException, IOException, ParseException {
     JSONParser parser = new JSONParser();
     JSONArray words = (JSONArray) parser.parse(new FileReader(path));
     ArrayList<String> wordList = new ArrayList<>();

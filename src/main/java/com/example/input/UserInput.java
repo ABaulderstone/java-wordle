@@ -1,11 +1,13 @@
-package com.example;
+package com.example.input;
 
 import java.util.Scanner;
+
+import com.example.TextColor;
 
 public class UserInput {
   private Scanner s;
   
-  UserInput() {
+  public UserInput() {
     this.s = new Scanner(System.in);
   }
 
