@@ -1,5 +1,7 @@
 package gamelogic;
 
+import java.util.Arrays;
+
 import com.example.TextColor;
 
 public class Guess {
@@ -16,7 +18,12 @@ public class Guess {
 
   public boolean compare(String selectedWord) {
     extractGreenLetters(selectedWord);
+    // System.out.println(new String(letters));
     extractYellowLetters(selectedWord);
+    // System.out.println(new String(letters));
+    // System.out.println("YELLOW");
+    // System.out.println(new String(yellowLetters));
+    // System.out.println("YELLOW");
     return word.equals(selectedWord);
   }
 
@@ -31,15 +38,24 @@ public class Guess {
   }
 
   public void extractYellowLetters(String selectedWord) {
-    char[] selectedLetters = selectedWord.toCharArray();
-    for(byte i = 0; i < selectedLetters.length; i++) {
-        String remainingLetters = new String(letters);
-        String subString = String.valueOf(selectedLetters[i]);
-        if(remainingLetters.contains(subString)) {
-          yellowLetters[i] = selectedLetters[i];
+    for(byte i = 0; i < letters.length; i++) {
+        final char currentLetter = letters[i];
+        String subString = String.valueOf(currentLetter);
+        System.out.println("substring");
+        System.out.println(subString);
+
+        //check count of letter in actual word, 
+        long actualCount = selectedWord.chars().filter(ch -> ch == currentLetter).count();
+        // check count of letter in green letter array
+        long alreadyOccuring = new String(greenLetters).chars().filter(ch -> ch == currentLetter).count();;
+        // if > add to yellow, else don't. 
+        if(selectedWord.contains(subString) && alreadyOccuring < actualCount) {
+          yellowLetters[i] = currentLetter;
           letters[i] = '*';
+          actualCount++;
         }
     }
+
   }
 
   public String generateColoredString(){ 
@@ -48,14 +64,13 @@ public class Guess {
       char currentChar = word.charAt(i);
        if( greenLetters[i] == currentChar) {
          builder.append(TextColor.GREEN.text + currentChar + TextColor.RESET.text);
-         continue;
-       }
-
-       if(yellowLetters[i] == currentChar) {
+        
+       } else if(yellowLetters[i] == currentChar) {
          builder.append(TextColor.YELLOW.text + currentChar + TextColor.RESET.text);
-        continue;
+       }else {
+         
+         builder.append(currentChar);
        }
-          builder.append(currentChar);
       }
       return builder.toString();
     }
