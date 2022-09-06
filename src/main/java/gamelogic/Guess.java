@@ -1,6 +1,5 @@
 package gamelogic;
 
-import java.util.Arrays;
 
 import com.example.TextColor;
 
@@ -18,12 +17,7 @@ public class Guess {
 
   public boolean compare(String selectedWord) {
     extractGreenLetters(selectedWord);
-    // System.out.println(new String(letters));
     extractYellowLetters(selectedWord);
-    // System.out.println(new String(letters));
-    // System.out.println("YELLOW");
-    // System.out.println(new String(yellowLetters));
-    // System.out.println("YELLOW");
     return word.equals(selectedWord);
   }
 
@@ -41,9 +35,7 @@ public class Guess {
     for(byte i = 0; i < letters.length; i++) {
         final char currentLetter = letters[i];
         String subString = String.valueOf(currentLetter);
-        System.out.println("substring");
-        System.out.println(subString);
-
+      
         //check count of letter in actual word, 
         long actualCount = selectedWord.chars().filter(ch -> ch == currentLetter).count();
         // check count of letter in green letter array
