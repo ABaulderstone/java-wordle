@@ -10,14 +10,14 @@ import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-public class JsonSelector extends WordSelector {
+public class JsonSelector implements WordSelector {
   private ArrayList<String> wordList;
 
   public JsonSelector(String path) throws FileNotFoundException, IOException, ParseException { 
     this.wordList = loadList(path);
   }
   
-  protected ArrayList<String> loadList(String path) throws FileNotFoundException, IOException, ParseException {
+  public ArrayList<String> loadList(String path) throws FileNotFoundException, IOException, ParseException {
     JSONParser parser = new JSONParser();
     JSONArray words = (JSONArray) parser.parse(new FileReader(path));
     ArrayList<String> wordList = new ArrayList<>();
