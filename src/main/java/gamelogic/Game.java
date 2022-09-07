@@ -13,7 +13,7 @@ public class Game {
   private String selectedWord; 
   private boolean won;
   private byte attempts;
-  private ArrayList<String> guesses;
+  private ArrayList<Guess> guesses;
   private UserInput userInput;
   
   final byte MAX_ATTEMPTS = 6;
@@ -30,30 +30,12 @@ public class Game {
 
 
   public void compareWords(String input) {
-    if(input.equals(selectedWord)) {
+    Guess currentGuess = new Guess(input);
+    this.guesses.add(currentGuess);
+    if(currentGuess.compare(this.selectedWord)) {
       this.won = true;
-      this.guesses.add(TextColor.GREEN.text + input + TextColor.RESET.text);
-      return; 
     }
-
-    char[] inputChars = input.toCharArray();
-    char[] selectedWordChars = this.selectedWord.toCharArray();
-    StringBuilder guessBuilder = new StringBuilder();
-    for(int i = 0; i < inputChars.length; i++ ) {
-      String substring = String.valueOf(inputChars[i]);
-      if(inputChars[i] == selectedWordChars[i]) {
-        guessBuilder.append(TextColor.GREEN.text + substring + TextColor.RESET.text );
-        selectedWordChars[i] = 0;
-        continue;
-      }
-
-      if(new String(selectedWordChars).contains(substring)) {
-        guessBuilder.append(TextColor.YELLOW.text + substring + TextColor.RESET.text);
-        continue;
-      }
-      guessBuilder.append(substring);
-    }
-    this.guesses.add(guessBuilder.toString());
+    return; 
   }
 
   public void run() {
@@ -72,8 +54,9 @@ public class Game {
     if(this.attempts == 0) return;
     System.out.println("Guesses: ");
     System.out.println();
-    for (String word : this.guesses) {
-      System.out.println(word);
+    for (Guess g: this.guesses) {
+      String output = g.generateColoredString();
+      System.out.println(output);
     }
   }
 
