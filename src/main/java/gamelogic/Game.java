@@ -3,13 +3,13 @@ package gamelogic;
 import java.util.ArrayList;
 
 
-import com.example.TextColor;
 import com.example.input.UserInput;
 
 import selectors.JsonSelector;
+import selectors.WordSelector;
 
 public class Game {
-  private JsonSelector selector;
+  private WordSelector selector;
   private String selectedWord; 
   private boolean won;
   private byte attempts;
@@ -18,7 +18,7 @@ public class Game {
   
   final byte MAX_ATTEMPTS = 6;
   
-  public Game(JsonSelector selector) {
+  public Game(WordSelector selector) {
     this.selector = selector;
     this.selectedWord = this.selector.randomWord();
     this.won = false;
